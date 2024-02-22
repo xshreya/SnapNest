@@ -1,0 +1,82 @@
+#box {
+    width: 60%;
+    max-width: 70%;
+    height: 50vh;
+    border: 1px solid grey;
+    border-radius: 1.5em;
+    padding: 2em;
+    margin: 10% auto;
+
+    text-align: center;
+
+}
+
+#logo-image{
+    margin-top: 5%;
+}
+
+#username {
+    font-size: 1.5em;
+    width: 80%;
+    padding: 0.5em;
+    margin-top: 15vh;
+    margin-bottom: 1em;
+    border-radius: 0.5em;
+    border: 0.1em solid #ccc;
+}
+
+
+.upload-btn {
+    display: inline-block;
+    background-color: thistle;
+    color: #fff;
+    padding: 1.5vh 5vw;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-top: 1vh;
+    transition: background-color 0.3s ease;
+    margin: auto;
+
+}
+
+.upload-btn:hover {
+    background-color: rgb(219, 161, 219);
+}
+
+.popup {
+    background-color: #fff;
+    background-image: url(image/popback.png);
+    border-radius: 1em;
+    width: 60vw;
+    height: 60vh;
+    padding: 2em;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+ 
+.popup-close{
+    position: absolute;
+    font-size: 2rem;
+    right: 3%;
+    top: 3%;
+
+}
+
+i{
+    margin: 0.9rem;
+}
+.drag-text{
+    color: rgb(92, 92, 92);
+    font-size: 1.2rem;
+    margin:0.8rem auto;
+}
+
+.uploadbutton-text{
+    padding: 0.2vh 0.2vw;
+    border: none;
+}
