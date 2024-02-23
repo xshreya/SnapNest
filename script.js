@@ -67,9 +67,9 @@ document.getElementById('filedeleteImage').addEventListener('click', function() 
 });
 
 
-var bucketName = "lamda-s3-for-assignment";
-var bucketRegion = "ap-south-1";
-var IdentityPoolId = "ap-south-1:a0ddc8e7-a3e4-4f2e-9f1a-07805faea0f9";
+var bucketName = "snapest-bucket";
+var bucketRegion = "us-east-1";
+var IdentityPoolId = "us-east-1:273f25b9-2d1c-43a3-b13b-903335f6218e";
 
 AWS.config.update({
     region: bucketRegion,
@@ -118,3 +118,9 @@ function s3upload() {
         }
     );
 };
+
+
+
+// ========================================home.html ========================================
+
+
