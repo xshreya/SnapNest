@@ -41,8 +41,8 @@ function handleFiles(files) {
 }
 
 
-function showPopup(event) {
-    event.preventDefault(); 
+function showPopup() {
+    event.preventDefault();
     document.getElementById('popupOverlay').style.display = 'block';
 }
 
@@ -53,6 +53,17 @@ function hidePopup() {
 // Add event listener to the upload button in the popup to handle file selection
 document.getElementById('fileInputPopup').addEventListener('change', function() {
     handleFiles(this.files);
+});
+
+
+document.getElementById('filedeleteImage').addEventListener('click', function() {
+    // Reset the uploaded image
+    const uploadedImage = document.querySelector('#popup-container img');
+    if (uploadedImage) {
+        uploadedImage.remove();
+    }
+    // Clear the file input value
+    document.getElementById('fileInputPopup').value = '';
 });
 
 

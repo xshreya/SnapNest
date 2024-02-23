@@ -1,6 +1,21 @@
+body{
+    display: flex;
+
+}
+
+.loginpage-img-box{
+    display: block;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.login-page-img{
+    height: 70vh;
+}
+
 #box {
-    width: 60%;
-    max-width: 70%;
+    width: 30vw;
+    /* max-width: 70%; */
     height: 50vh;
     border: 1px solid grey;
     border-radius: 1.5em;
@@ -11,9 +26,21 @@
 
 }
 
+#popupOverlay{
+    display: none;
+}
+
 #logo-image{
     margin-top: 5%;
 }
+
+.popup-buttons-container{
+    position: relative;
+    /* display: block; */
+    margin-bottom: 7vh;
+    margin-right: 5vh;
+}
+
 
 #username {
     font-size: 1.5em;
@@ -40,6 +67,13 @@
 
 }
 
+#fileInputPopup{
+    display: block;
+    position: relative;
+    /* margin-top: 5vh; */
+}
+
+
 .upload-btn:hover {
     background-color: rgb(219, 161, 219);
 }
@@ -52,7 +86,7 @@
     height: 60vh;
     padding: 2em;
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
