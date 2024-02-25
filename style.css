@@ -26,6 +26,11 @@ body{
 
 }
 
+p a{
+    color: rgb(87, 20, 87);
+    font-size: 1.2rem;
+}
+
 #popupOverlay{
     display: none;
 }

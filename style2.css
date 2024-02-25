@@ -6,7 +6,7 @@
     left: 0;
     width: 97vw;
     background-color: white;
-    z-index: 1;
+    z-index: 100000;
     height: 16vh;
     /* background-color: #f0f0f0; */
 }
@@ -54,6 +54,7 @@ header{
     height: 20vh;
 }
 
+
   @media (min-width: 768px) {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
@@ -82,7 +83,7 @@ header{
 
   .nav-scroller {
     position: relative;
-    z-index: 2;
+    z-index: 100000;
     height: 2.75rem;
     overflow-y: hidden;
   }
@@ -115,21 +116,208 @@ header{
     --bs-btn-active-border-color: #5a23c8;
   }
 
-  .bd-mode-toggle {
+  /* .bd-mode-toggle {
     z-index: 1500;
-  }
-
+  } */
+/* 
   .bd-mode-toggle .dropdown-menu .active .bi {
     display: block !important;
-  }
+  } */
+
   .card-image{
     /* background-color: red; */
     height: 20vh;
     width:"100%";
   }
 
-.col, .postcard{
-    border-radius: 10px;
+
+.card-container {
+  width: 20vw;
+  /* margin: 10px; */
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: none; /* Remove the border */
 }
 
 
+.card-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer{
+  width: 100%;
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 5rem;
+  color: purple;
+  background-color: rgb(236, 236, 241);
+}
+
+.footer p{
+  display: block;
+  margin-top: 6vh;
+}
+
+.footer h3{
+  display: block;
+  width: 100vw;
+}
+
+.triple-dot {
+  font-size: 1rem;
+  color: black;
+  background-color: white;
+  border-radius: 50%;
+  padding: 4px 10px;
+}
+
+.triple-dot:hover{
+  cursor: pointer;
+}
+
+.image-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust minmax values as needed */
+  gap: 20px; /* Adjust the gap between images */
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Adjust border radius as needed */
+}
+
+
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform: scale(0.1)} 
+  to {transform: scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 0.625em 0.875em; 
+  z-index: 1000; 
+  border-radius: 1.2rem;
+  font-family: Arial, sans-serif;
+  width: 10vw; /* Changed width to 10% of the viewport width */
+}
+
+.show {
+  display: block;
+}
+
+.dropdown-menu button {
+  display: block;
+  width: 90%; 
+  padding: 0.5em 0.5em; 
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+
+  text-align: left; /* Align button text to the left */
+  transition: background-color 0.3s ease;
+  margin: 0 auto; /* Auto margin to center the button */
+}
+
+.dropdown-menu button:hover {
+  background-color: #e0e0e0; /* Slightly darker grey background on hover */
+  color: #333; /* Keep text color same on hover */
+}

@@ -1,76 +1,142 @@
-async function loadContent() {
-    s3.listObjects({ Prefix: "images" }, function (err, data) {
-      if (err) {
-        return alert("There was an error viewing your album: " + err.message);
-      }
-      // 'this' references the AWS.Response instance that represents the response
-      var href = this.request.httpRequest.endpoint.href;
-      console.log("href is",href)
-      var bucketUrl = href + "snapest-bucket" + "/";
-      console.log("bucketurl is",bucketUrl)
-  
-      // return
-      var photos = data.Contents.map(function (photo) {
-        console.log("photo is", photo);
-        var photoKey = photo.Key;
-        var photoUrl = bucketUrl + photoKey;
-        console.log("photokey is", photoUrl);
-  
-        let imgContainer = document.getElementById("imageContainer");
-        let imageName = photoKey.split("/");
-        imageName[imageName.length - 1];
-        // console.log(imgContainer)
-        let postcard = document.createElement("div");
-        postcard.className = "col postcard";
-        // console.log(postcard)
-        postcard.innerHTML = `<div class="card shadow-sm">
-      <img src="${photoUrl}" id=${photoKey} class="card-image" />
-      
-      <div class="card-body">
-        <p class="card-text">${imageName[imageName.length - 1]}</p>
-        <div class="d-flex justify-content-between align-items-left">
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary delete-btn" >Delete</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary view-btn">View</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary download-btn" >Download</button>
+function loadContent() {
+  s3.listObjects({ Prefix: "images" }, function (err, data) {
+    if (err) {
+      return alert("There was an error viewing your album: " + err.message);
+    }
+    var href = this.request.httpRequest.endpoint.href;
+    var bucketUrl = href + "snapest-bucket" + "/";
+
+    var photos = data.Contents.map(function (photo) {
+      var photoKey = photo.Key;
+      if (photoKey == "images/") return;
+
+      var photoUrl = bucketUrl + photoKey;
+
+      let imgContainer = document.getElementById("imageContainer");
+      let imageName = photoKey.split("/");
+      imageName = imageName[imageName.length - 1];
+
+      let postcard = document.createElement("div");
+      postcard.className = "col postcard";
+      postcard.innerHTML = `
+        <div class="card-container">
+          <div class="card">
+            <img src="${photoUrl}" id="${photoKey}" class="card-image" />
+            <div class="overlay">
+              <i class="fas fa-ellipsis-v triple-dot"></i>
+              <div class="dropdown-menu">
+                <button type="button" class="btn btn-sm btn-outline-secondary delete-btn" >Delete</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary view-btn">View</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary download-btn" >Download</button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>`;
-  
-        let dwnloadBtn=postcard.getElementsByClassName("download-btn")
-        console.log(dwnloadBtn[0])
-        imgContainer.append(postcard);
+        </div>`;
+
+      let dwnloadBtn = postcard.querySelector(".download-btn");
+      dwnloadBtn.addEventListener("click", () => downloadImage(photoUrl, imageName));
+
+      let viewImageBtn = postcard.querySelector(".view-btn");
+      viewImageBtn.addEventListener("click", () => {
+        var modal = document.getElementById('myModal');
+        var modalImg = document.getElementById("img01");
+        modal.style.display = "block";
+        modalImg.src = photoUrl;
       });
+
+      let deleteImageBtn = postcard.querySelector(".delete-btn");
+      deleteImageBtn.addEventListener("click", () => deletePhoto(photoKey));
+
+      imgContainer.append(postcard);
+
+      // Add event listener to this card
+      postcard.addEventListener('click', function(event) {
+        // Check if the clicked element is the triple dot button
+        if (event.target.classList.contains('triple-dot')) {
+          // Close all other open dropdown menus
+          const allDropdowns = document.querySelectorAll('.dropdown-menu.show');
+          allDropdowns.forEach(menu => {
+            if (menu !== this.querySelector('.dropdown-menu')) {
+              menu.classList.remove('show');
+            }
+          });
+
+          // Get reference to the dropdown menu within this postcard
+          const dropdownMenu = this.querySelector('.dropdown-menu');
+          // Toggle the class to show/hide the dropdown menu
+          dropdownMenu.classList.toggle('show');
+
+          // Get position of the triple dot button
+          const tripleDotButton = event.target;
+          const rect = tripleDotButton.getBoundingClientRect();
+
+          // Position the dropdown menu relative to the triple dot button
+          dropdownMenu.style.position = 'absolute'; // or 'fixed' depending on your layout
+          dropdownMenu.style.top = `${rect.bottom}px`;
+          dropdownMenu.style.left = `${rect.left}px`;
+
+          // Append dropdown menu to the postcard
+          this.appendChild(dropdownMenu);
+        } else {
+          // If clicked outside the triple dot button, close all dropdown menus
+          const allDropdowns = document.querySelectorAll('.dropdown-menu');
+          allDropdowns.forEach(menu => {
+            if (menu !== this.querySelector('.dropdown-menu')) {
+              menu.classList.remove('show');
+            }
+          });
+        }
+      });
+
     });
-    return 1;
-  }
-  loadContent();
-  
-  window.addEventListener("load", async (event) => {
-    console.log("window loaded");
-    // if(await loadContent()==1)
-    // {
-    //   let deletebtn=document.querySelectorAll("delete-btn")
-    //   console.log(deletebtn)
-    // }
   });
-  
-  // setTimeout(()=>{
-  //   location.reload()
-  // },4000)
-  
-  function deletePhoto(photoname) {
-    s3.deleteObject({ Key: "images/" + photoname }, function (err, data) {
-      if (err) {
-        return alert("There was an error deleting your photo: ", err.message);
-      }
-      alert("Successfully deleted photo.");
-      // viewAlbum(albumName);
-    });
-  }
-  deletePhoto("penguin.png");
-  function downloadPic(url)
-  {
-    location.replace(url)
-  }
+}
+
+// Call the function to fetch data and create cards
+loadContent();
+
+// Add scroll functionality in relation to the image
+document.addEventListener('scroll', function() {
+  const allDropdowns = document.querySelectorAll('.dropdown-menu.show');
+  allDropdowns.forEach(menu => {
+    const rect = menu.parentElement.getBoundingClientRect();
+    const image = menu.closest('.card').querySelector('.card-image');
+    const imageRect = image.getBoundingClientRect();
+    const topPosition = imageRect.bottom - rect.height;
+    const leftPosition = imageRect.left;
+    menu.style.position = 'absolute';
+    menu.style.top = `${topPosition}px`;
+    menu.style.left = `${leftPosition}px`;
+  });
+});
+
+function deletePhoto(photoKey) {
+  s3.deleteObject({ Key: photoKey }, function (err, data) {
+    if (err) {
+      return alert("There was an error deleting your photo: " + err.message);
+    }
+    alert("Successfully deleted photo.");
+    location.reload();
+  });
+}
+
+async function downloadImage(imageSrc, nameOfDownload) {
+  const response = await fetch(imageSrc, {
+    method: 'GET',
+    headers: { "Cache-Control": 'no-cache' },
+  });
+
+  const blobImage = await response.blob();
+
+  const href = URL.createObjectURL(blobImage);
+
+  const anchorElement = document.createElement('a');
+  anchorElement.href = href;
+  anchorElement.download = nameOfDownload;
+
+  document.body.appendChild(anchorElement);
+  anchorElement.click();
+
+  document.body.removeChild(anchorElement);
+  window.URL.revokeObjectURL(href);
+}
