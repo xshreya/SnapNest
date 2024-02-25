@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 .header-top {
   display: block;
   position: fixed;
@@ -309,7 +309,8 @@ header {
   background-color: #e0e0e0; /* Slightly darker grey background on hover */
   color: #333; /* Keep text color same on hover */
 }
-=======
+
+
 .header-top {
     display: block;
     position: fixed;
@@ -633,4 +634,4 @@ header{
   background-color: #e0e0e0; /* Slightly darker grey background on hover */
   color: #333; /* Keep text color same on hover */
 }
->>>>>>> 95bf3db9c415afc9b7009555ad8fa0d469f97698
+
