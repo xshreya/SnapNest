@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -48,3 +49,55 @@
         <script src="script.js"></script>
     </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SnapNest</title>
+        <link rel="stylesheet" href="style.css">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    </head>
+    <body>
+
+        <div class="loginpage-img-box">
+            <img src="image/login-photo.jpg" alt="login-photo" class="login-page">
+        </div>
+
+        <div id="box" ondragover="dragOverHandler(event);" ondragover="dragOverHandler(event);">
+            <img src="image/logo.png" alt="snapnest-logo" id="logo-image">
+            <form id="uploadForm">
+                <input type="text" id="username" placeholder="Username" style="font-size: 1.5em;"><br>
+                <button id="upload" class="upload-btn" onclick="showPopup()">Upload</button>
+                <input type="file" id="fileInput" onchange="handleFiles(this.files)" accept="image/jpeg, image/png, image/gif" style="display: none;">
+                <p><a href="home.html">Go to Dashboard-></a></p>
+            </form>
+        </div>
+
+
+        <div class="overlay" id="popupOverlay">
+            <div class="popup" id="popup-container" ondragover="dragOverHandler(event);" ondrop="dropHandler(event);">
+                <h2><i class="fa-regular fa-image fa-xl"></i><span class="heading-upload">Upload a snap!</span></h2>
+                <span class="popup-close" onclick="hidePopup()"><i class="fas fa-times"></i></span>
+                <br>
+                
+                <div class="popup-buttons-container">
+                    <label for="fileInputPopup" class="upload-btn">Browse</label>
+                    <label for="filedeleteImage" class="upload-btn" id="filedeleteImage">Reset</label>
+                    <button type="submit" class="upload-btn uploadbutton-text" onclick="s3upload()" title="Upload"><i class="fa-solid fa-cloud-arrow-up"></i></button>
+                </div>
+
+                <input type="file" id="fileInputPopup" onchange="handleFiles(this.files)" accept="image/jpeg, image/png, image/gif" style="display: none;">
+            </div>
+        </div>
+
+
+
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1563.0.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/uuid@9.0.1/dist/index.min.js"></script> -->
+        <script src="script.js"></script>
+    </body>
+</html>
+>>>>>>> 95bf3db9c415afc9b7009555ad8fa0d469f97698
