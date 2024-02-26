@@ -37,7 +37,7 @@ function loadContent() {
       dwnloadBtn.addEventListener("click", () => {
         downloadImage(photoUrl, imageName);
         let dropdownMenu = postcard.querySelector(".dropdown-menu");
-        console.log(dropdownMenu);
+        // console.log(dropdownMenu);
         dropdownMenu.style.display = "none";
       });
 
@@ -49,7 +49,7 @@ function loadContent() {
         modal.style.zIndex = 5;
         modalImg.src = photoUrl;
         let dropdownMenu = postcard.querySelector(".dropdown-menu");
-        console.log(dropdownMenu);
+        // console.log(dropdownMenu);
         dropdownMenu.style.display = "none";
       });
 
@@ -57,7 +57,7 @@ function loadContent() {
       deleteImageBtn.addEventListener("click", () => {
         deletePhoto(photoKey);
         let dropdownMenu = postcard.querySelector(".dropdown-menu");
-        console.log(dropdownMenu);
+        // console.log(dropdownMenu);
         dropdownMenu.style.display = "none";
       });
 
@@ -65,7 +65,7 @@ function loadContent() {
       // console.log(optionsMenu);
       optionsMenu.addEventListener("click", () => {
         let dropdownMenu = postcard.querySelector(".dropdown-menu");
-        console.log(dropdownMenu);
+        // console.log(dropdownMenu);
         dropdownMenu.style.display = "block";
         // dropdownMenu.style.zindex=1000000000;
         dropdownMenu.style.position = "absolute";
@@ -77,7 +77,7 @@ function loadContent() {
       console.log(dropdownMenu);
       dropdownMenu.style.display = "none";
       dropdownMenu.addEventListener("mouseleave", () => {
-        console.log("focus lost");
+        // console.log("focus lost");
         dropdownMenu.style.display = "none";
       });
       imgContainer.append(postcard);
@@ -175,7 +175,7 @@ async function downloadImage(imageSrc, nameOfDownload) {
 
 // close span
 let closeImg = document.getElementsByClassName("close");
-console.log(closeImg);
+// console.log(closeImg);
 closeImg[0].addEventListener("click", () => {
   var modal = document.getElementById("myModal");
   var modalImg = document.getElementById("img01");
