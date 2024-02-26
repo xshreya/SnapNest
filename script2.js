@@ -153,7 +153,7 @@ function deletePhoto(photoKey) {
 }
 
 async function downloadImage(imageSrc, nameOfDownload) {
-  const response = await fetch(imageSrc, {
+  const response = await fetch(imageSrc, { // Implemented course headers for download
     method: "GET",
     headers: { "Cache-Control": "no-cache" },
   });
